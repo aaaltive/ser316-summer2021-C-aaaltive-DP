@@ -2,11 +2,11 @@
 
 **General**
 - [ ] use 3 design patterns
-- [ ] A world with at least 2 trainers who each have at least 1 code-a-mon
+- [x] A world with at least 2 trainers who each have at least 1 code-a-mon (Singleton)
 - [ ] Trainers can aquire more code-a-mons up to 6
 - [ ] Code-a-mons compete in 1v1 battles
-- [ ] Simulations are run on cycles with 2 parts day and night
-- [ ] each part will have its own weather event
+- [x] Simulations are run on cycles with 2 parts day and night
+- [x] each part will have its own weather event
 - [ ] Weather events should benefit some and and disadvantage other code-a-mons
 - [ ] Code-a-mons should have different types and have advantages/disadvantages over eachother
 - [ ] trainers can battle with wild code-a-mons during day for XP

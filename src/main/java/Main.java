@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 /**
  * This is the Main class, the starting point for running the program.
  *
@@ -13,6 +15,10 @@ public class Main {
      */
 
     public static void main(String[] args) {
-        System.out.println("Waddup, world.");
+        System.out.println("Spinning up world.");
+        System.out.println("It is a " + World.getWorld().getCycle().getEnvironment().getWeather().toString().toLowerCase() + " day.");
+//        System.out.println();
+
+
     }
 }
