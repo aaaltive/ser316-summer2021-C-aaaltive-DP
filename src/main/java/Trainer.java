@@ -1,16 +1,20 @@
-public class Trainer {
+public class Trainer implements Constants{
 
     private CodeAMon[] codeAMons;
+    private int numMons;
     private int credits;
     private Item[] inventory;
     private int wins;
     private int losses;
+    private String Name;
 
-    public Trainer(){
+    public Trainer(String name){
         codeAMons = new CodeAMon[6];
-        credits = Constants.STARTING_CREDITS;
-        inventory = new Item[Constants.MAX_INVENTORY_SIZE];
-        for (int i = 0; i < Constants.MAX_INVENTORY_SIZE; i++) {
+        // TODO: 6/23/21 add a CodeAMon to array
+        numMons = 1;
+        credits = STARTING_CREDITS;
+        inventory = new Item[MAX_INVENTORY_SIZE];
+        for (int i = 0; i < MAX_INVENTORY_SIZE; i++) {
             inventory[i] = new Item(Item.ItemTypes.EMPTY);
         }
         wins = 0;
@@ -41,5 +45,37 @@ public class Trainer {
         for (int i = 0; i < codeAMons.length; i++) {
             codeAMons[i].heal();
         }
+    }
+
+    public CodeAMon[] getCodeAMons() {
+        return codeAMons;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public Item[] getInventory() {
+        return inventory;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void catchMon(CodeAMon mon) {
+        codeAMons[numMons] = mon;
+    }
+
+    public void payReward() {
+        credits += BATTLE_REWARD;
     }
 }

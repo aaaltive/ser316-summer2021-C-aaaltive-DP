@@ -1,8 +1,10 @@
 public class Cycle {
     private Environment environment;
+    private Time time;
 
-    Cycle(int weatherNumber){
+    public Cycle(int weatherNumber, Time time) {
         environment = new Environment(Environment.Weather.values()[weatherNumber]);
+        this.time = time;
     }
 
     public Environment getEnvironment(){
@@ -11,7 +13,9 @@ public class Cycle {
 
     public void runCycle(Trainer[] trainers) {
         for (int i = 0; i < trainers.length; i++) {
-            new Action(trainers[i]);
+            new Action(trainers[i], time);
         }
     }
+
+    public enum Time {DAY, NIGHT};
 }

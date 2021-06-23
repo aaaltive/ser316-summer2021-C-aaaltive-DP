@@ -13,9 +13,12 @@ public interface Constants {
     int EMPTY_ITEM = 0;
     int HEALING_POTION_ITEM = 1;
     int ATTACK_BOOSTER_ITEM = 2;
+    int ITEM_COST = 4;
     int MAX_HP = 100;
     int HEAL_HP = 34;
     int ACTION_HEAL = 0;
-    int ACTION_BUY  = 1;
-    int ACTION_BATTLE =2;
+    int ACTION_BUY  = 0;
+    int ACTION_BATTLE =1;
+    int MIN_HP_ATTACK = 30;
+    int BATTLE_REWARD = 2;
 }

@@ -17,10 +17,12 @@ public class World {
     private World() {
         weatherChooser = new Random();
         trainers = new Trainer[12];
-        trainers[0] = new Trainer();
-        trainers[1] = new Trainer();
-        day = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length));
-        night = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length));
+        trainers[0] = new Trainer("Erich Gamma");
+        trainers[1] = new Trainer("Richard Helm");
+        trainers[2] = new Trainer("Ralph Johnson");
+        trainers[3] = new Trainer("John Vlissides");
+        day = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.DAY);
+        night = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.NIGHT);
         time = day;
     }
 
@@ -37,8 +39,8 @@ public class World {
     }
 
     private void nextDay(){
-        day = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length));
-        night = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length));
+        day = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.DAY);
+        night = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.NIGHT);
     }
 
     private void changeTime(){

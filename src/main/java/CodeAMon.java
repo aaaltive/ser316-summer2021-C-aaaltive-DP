@@ -3,9 +3,10 @@ public abstract class CodeAMon implements Constants {
     protected int hp;
     protected int xp;
     protected int level;
-    protected String name;
+    protected String type;
     protected double typeBuffer;
     protected double envBuffer;
+    private boolean didBattle;
 
     //todo: implement class
     public double getAttack() {
@@ -20,7 +21,7 @@ public abstract class CodeAMon implements Constants {
 
     }
 
-    public String getName() {
+    public String getType() {
         return null;
     }
 
