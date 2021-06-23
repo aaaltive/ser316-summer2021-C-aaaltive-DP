@@ -8,4 +8,10 @@ public class Cycle {
     public Environment getEnvironment(){
         return environment;
     }
+
+    public void runCycle(Trainer[] trainers) {
+        for (int i = 0; i < trainers.length; i++) {
+            new Action(trainers[i]);
+        }
+    }
 }

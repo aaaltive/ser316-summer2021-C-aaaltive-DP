@@ -1,11 +1,21 @@
 public interface Constants {
-    public static final double BONUS = 1.25;
-    public static final double DEBUFF = 0.75;
-    public static final double NO_BONUS = 1.0;
-    public static final double ATTACK_BONUS = 1.2;
-    public static final double NONE_ATTACK = 0.0;
-    public static final double K_O = 0.0;
-    public static final double TESTING_DAMAGE_VALUE = 130.0;
-    public static final double MIN_ATTACK_DAMAGE = 1.0;
-    public static final double NO_ATTACK_MULTIPLIER = 1.10;
+    double BONUS = 1.25;
+    double DEBUFF = 0.75;
+    double NO_BONUS = 1.0;
+    double ATTACK_BONUS = 1.2;
+    double NONE_ATTACK = 0.0;
+    double K_O = 0.0;
+    double TESTING_DAMAGE_VALUE = 130.0;
+    double MIN_ATTACK_DAMAGE = 1.0;
+    double NO_ATTACK_MULTIPLIER = 1.10;
+    int STARTING_CREDITS = 10;
+    int MAX_INVENTORY_SIZE = 5;
+    int EMPTY_ITEM = 0;
+    int HEALING_POTION_ITEM = 1;
+    int ATTACK_BOOSTER_ITEM = 2;
+    int MAX_HP = 100;
+    int HEAL_HP = 34;
+    int ACTION_HEAL = 0;
+    int ACTION_BUY  = 1;
+    int ACTION_BATTLE =2;
 }
