@@ -3,45 +3,43 @@ public abstract class CodeAMon implements Constants {
     protected int hp;
     protected int xp;
     protected int level;
-    protected String type;
+    protected Types type;
     protected double typeBuffer;
     protected double envBuffer;
     private boolean didBattle;
 
-    //todo: implement class
-    public double getAttack() {
-        return 0;
+    public abstract double getAttack();
+
+    protected abstract void setWeatherBonus(Environment.Weather weather);
+
+    protected abstract void setTypeBonus(CodeAMon opponent);
+
+    public abstract double getDefense();
+
+    public Types getType() {
+        return type;
     }
 
-    protected void setWeatherBonus(Environment.Weather weather) {
-
-    }
-
-    protected void setTypeBonus(CodeAMon opponent) {
-
-    }
-
-    public String getType() {
-        return null;
-    }
-
-    public double getDefense() {
-        return 0;
-    }
-
-    public void resetBonus() {
-
+    private void resetBonus() {
+        typeBuffer = 0.0;
+        envBuffer = 0.0;
     }
 
     public void heal(){
-        hp = hp + HEAL_HP;
-        if (hp > MAX_HP) {
-            hp = MAX_HP;
+        if (!didBattle) {
+            hp = hp + HEAL_HP;
+            if (hp > MAX_HP) {
+                hp = MAX_HP;
+            }
         }
     }
 
-    public void setXP() {
+    public void markDidBattle(){
+        didBattle = true;
+    }
 
+    public void awardXP(int opponentLevel) {
+        level += opponentLevel;
     }
 
     public void takeHp(double percentChange){
@@ -49,7 +47,10 @@ public abstract class CodeAMon implements Constants {
     }
 
     public void evolve() {
-
+        if(xp == level * 2){
+            level++;
+            xp = 0;
+        }
     }
 
     public int getHp() {
@@ -64,11 +65,11 @@ public abstract class CodeAMon implements Constants {
         return level;
     }
 
-    public double getTypeBuffer() {
-        return typeBuffer;
+    public void endDay(){
+        evolve();
+        heal();
+        didBattle = false;
     }
 
-    public double getEnvBuffer() {
-        return envBuffer;
-    }
+    public enum Types {ADAPTOR, BUILDER, COMMAND, SINGLTON}
 }

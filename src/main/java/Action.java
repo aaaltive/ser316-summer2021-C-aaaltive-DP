@@ -10,7 +10,7 @@ public class Action implements Constants{
         if (time.toString().compareTo("DAY") == 0) {
             switch (actionChoice) {
                 case ACTION_BUY:
-                    int itemChooser = randomChooser.nextInt();
+                    int itemChooser = randomChooser.nextInt(3);
                     Item.ItemTypes purchase = Item.ItemTypes.values()[itemChooser];
                     System.out.println(trainer.getName() + " wants to buy a " + purchase.toString() + ".");
                     if (trainer.getCredits() > ITEM_COST && trainer.getInventory().length < MAX_INVENTORY_SIZE) {
@@ -24,7 +24,7 @@ public class Action implements Constants{
                     CodeAMonFactory factory = new CodeAMonFactory();
                     Battle battle = new Battle();
                     CodeAMon attacker = trainer.callCodeAMon();
-                    CodeAMon wildCodeAMon = factory.getCodeAMon();
+                    CodeAMon wildCodeAMon = factory.getWildCodeAMon();
                     System.out.println(trainer.getName() + " found a " + wildCodeAMon.getType().toString().toLowerCase()
                             + " and will attempt to catch it using a " + attacker.getType().toString().toLowerCase()
                             + ".");

@@ -17,6 +17,7 @@ public class World {
     private World() {
         weatherChooser = new Random();
         trainers = new Trainer[12];
+        //TODO: add 1 codeAMon to each trainer
         trainers[0] = new Trainer("Erich Gamma");
         trainers[1] = new Trainer("Richard Helm");
         trainers[2] = new Trainer("Ralph Johnson");
@@ -41,19 +42,14 @@ public class World {
     private void nextDay(){
         day = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.DAY);
         night = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.NIGHT);
-    }
-
-    private void changeTime(){
-        if (time.equals(day)) {
-            time = night;
-        } else {
-            time = null;
-            nextDay();
-            time = day;
-        }
+        //todo: add the healing of codeamon that did not battle during night.
     }
 
     public void letWorldRun(int numberCycles){
-        //todo: implement this
+        for (int i = 0; i < numberCycles; i++) {
+            day.runCycle(world.getTrainers());
+            night.runCycle(world.getTrainers());
+            nextDay();
+        }
     }
 }

@@ -21,4 +21,5 @@ public interface Constants {
     int ACTION_BATTLE =1;
     int MIN_HP_ATTACK = 30;
     int BATTLE_REWARD = 2;
+    double WILD_MON_HEALTH_DEBUFF = .4;
 }
