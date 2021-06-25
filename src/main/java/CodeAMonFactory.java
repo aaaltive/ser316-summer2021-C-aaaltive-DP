@@ -1,11 +1,19 @@
 public class CodeAMonFactory {
 
-    int monsBalancer = 0;
+    private int monsBalancer;
+
+    public CodeAMonFactory(){
+        monsBalancer = 0;
+    }
 
     public CodeAMon getWildCodeAMon (){
-        CodeAMon wildMon = getCodeAMon(CodeAMon.Types.values()[monsBalancer++]);
+        CodeAMon wildMon = getCodeAMon(CodeAMon.Types.values()[monsBalancer++ % 4]);
         wildMon.takeHp(Constants.WILD_MON_HEALTH_DEBUFF);
         return wildMon;
+    }
+
+    public CodeAMon getCodeAMon (){
+        return getCodeAMon(CodeAMon.Types.values()[monsBalancer++ % 4]);
     }
 
     public CodeAMon getCodeAMon (CodeAMon.Types type){

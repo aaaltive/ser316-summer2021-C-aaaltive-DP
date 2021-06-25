@@ -6,11 +6,16 @@ public class Trainer implements Constants{
     private Item[] inventory;
     private int wins;
     private int losses;
-    private String Name;
+    private String name;
 
-    public Trainer(String name){
+    public Trainer(){
+        name = "wild";
+    }
+
+    public Trainer(String name, CodeAMonFactory factory){
+        this.name = name;
         codeAMons = new CodeAMon[6];
-        // TODO: 6/23/21 add a CodeAMon to array
+        codeAMons[0] = factory.getCodeAMon();
         numMons = 1;
         credits = STARTING_CREDITS;
         inventory = new Item[MAX_INVENTORY_SIZE];
@@ -21,19 +26,20 @@ public class Trainer implements Constants{
         losses = 0;
     }
 
-    public void buyItem(int itemCost, Item.ItemTypes itemType){
-        credits -= itemCost;
+    public boolean buyItem(Item.ItemTypes itemType){
+        credits -= ITEM_COST;
         for (int i = 0; i < inventory.length; i++) {
             if (inventory[i].getType().toString().compareTo(Item.ItemTypes.EMPTY.toString()) == 0){
                 inventory[i] = new Item(itemType);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     public CodeAMon callCodeAMon() {
         CodeAMon chosenMon = codeAMons[0];
-        for (int i = 1; i < codeAMons.length; i++) {
+        for (int i = 1; i < numMons; i++) {
             if (codeAMons[i].getHp() > chosenMon.getHp()) {
                 chosenMon = codeAMons[i];
             }
@@ -68,7 +74,7 @@ public class Trainer implements Constants{
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void catchMon(CodeAMon mon) {

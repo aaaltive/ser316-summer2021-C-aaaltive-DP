@@ -1,29 +1,32 @@
 /**
  * Class World will be a singlton.  There will be one world that is created at the beginning of the program that will
- * have cycles that will have weather, trainers, a wilderness, and code-a-mon monsters.
+ * have cycles that will have language, trainers, a wilderness, and code-a-mon monsters.
  */
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class World {
 
-    private Trainer[] trainers;
+    private ArrayList<Trainer> trainers;
     private Cycle time;
     private Cycle day;
     private Cycle night;
-    private Random weatherChooser;
+    private Random languageChooser;
     private static World world = new World();
+    private CodeAMonFactory factory;
 
     private World() {
-        weatherChooser = new Random();
-        trainers = new Trainer[12];
+        languageChooser = new Random();
+        factory = new CodeAMonFactory();
+        trainers = new ArrayList<Trainer>();
         //TODO: add 1 codeAMon to each trainer
-        trainers[0] = new Trainer("Erich Gamma");
-        trainers[1] = new Trainer("Richard Helm");
-        trainers[2] = new Trainer("Ralph Johnson");
-        trainers[3] = new Trainer("John Vlissides");
-        day = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.DAY);
-        night = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.NIGHT);
+        trainers.add(new Trainer("Erich Gamma", factory));
+        trainers.add(new Trainer("Richard Helm", factory));
+        trainers.add(new Trainer("Ralph Johnson", factory));
+        trainers.add(new Trainer("John Vlissides", factory));
+        day = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.DAY);
+        night = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.NIGHT);
         time = day;
     }
 
@@ -31,8 +34,12 @@ public class World {
         return world;
     }
 
-    public Trainer[] getTrainers() {
+    public ArrayList<Trainer> getTrainers() {
         return trainers;
+    }
+
+    public CodeAMonFactory getFactory() {
+        return factory;
     }
 
     public Cycle getCycle() {
@@ -40,8 +47,8 @@ public class World {
     }
 
     private void nextDay(){
-        day = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.DAY);
-        night = new Cycle(weatherChooser.nextInt(Environment.Weather.values().length), Cycle.Time.NIGHT);
+        day = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.DAY);
+        night = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.NIGHT);
         //todo: add the healing of codeamon that did not battle during night.
     }
 

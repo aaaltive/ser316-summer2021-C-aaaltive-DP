@@ -1,22 +1,14 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public class CommandMon extends CodeAMon{
 
-    @Override
-    public double getAttack() {
-        return 0;
+    public CommandMon() {
+        super();
+        defaultDamage = 40;
+        defaultDefense = .20;
+        type = Types.COMMAND;
+        debuffType = Types.ADAPTOR;
+        buffType = Types.SINGLTON;
     }
 
-    @Override
-    protected void setWeatherBonus(Environment.Weather weather) {
-
-    }
-
-    @Override
-    protected void setTypeBonus(CodeAMon opponent) {
-
-    }
-
-    @Override
-    public double getDefense() {
-        return 0;
-    }
 }

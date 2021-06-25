@@ -1,5 +1,5 @@
 /**
- * Class creates an environment object that describes the weather and the buffed and
+ * Class creates an environment object that describes the language and the buffed and
  * debuffed types, and is held by a mascotmon.
  *
  * @author Armand Altiveros, from code provided in SER316 shell
@@ -8,42 +8,42 @@
 
 public class Environment {
 
-    private Weather weather;
-    private String buffedType;
-    private String debuffedType;
+    private Language language;
+    private CodeAMon.Types buffedType;
+    private CodeAMon.Types debuffedType;
 
     /**
      * Default constructor for an environment.
      */
 
     public Environment(){
-        this(Weather.NEUTRAL);
+        this(Language.LOLCODE);
     }
 
     /**
-     * creates a weather type for a battle scenario and sets up the buffed and
+     * creates a language type for a battle scenario and sets up the buffed and
      * debuffed types.
-     * @param weather the weather type for the battle
+     * @param language the language type for the battle
      */
 
-    public Environment(Weather weather) {
-        this.weather = weather;
-        switch (weather) {
-            case SUNNY:
-                this.buffedType = "Fire";
-                this.debuffedType = "Water";
+    public Environment(Language language) {
+        this.language = language;
+        switch (language) {
+            case CPLUS:
+                this.buffedType = CodeAMon.Types.SINGLTON;
+                this.debuffedType = CodeAMon.Types.BUILDER;
                 break;
-            case RAINY:
-                this.buffedType = "Water";
-                this.debuffedType = "Fire";
+            case JAVA:
+                this.buffedType = CodeAMon.Types.BUILDER;
+                this.debuffedType = CodeAMon.Types.COMMAND;
                 break;
-            case DROUGHT:
-                this.buffedType = "Ground";
-                this.debuffedType = "Normal";
+            case PYTHON:
+                this.buffedType = CodeAMon.Types.ADAPTOR;
+                this.debuffedType = CodeAMon.Types.SINGLTON;
                 break;
             default:
-                this.buffedType = "";
-                this.debuffedType = "";
+                this.buffedType = CodeAMon.Types.COMMAND;
+                this.debuffedType = CodeAMon.Types.ADAPTOR;
                 break;
         }
     }
@@ -53,7 +53,7 @@ public class Environment {
      * @return a string representing the buffedType
      */
 
-    public String getBuffedType() {
+    public CodeAMon.Types getBuffedType() {
         return buffedType;
     }
 
@@ -62,20 +62,20 @@ public class Environment {
      * @return a string representing the debuffedType
      */
 
-    public String getDebuffedType() {
+    public CodeAMon.Types getDebuffedType() {
         return debuffedType;
     }
 
     /**
-     * getter method for the weather variable.
-     * @return this value for weather, an enum.
+     * getter method for the language variable.
+     * @return this value for language, an enum.
      */
 
-    public Weather getWeather() {
-        return weather;
+    public Language getLanguage() {
+        return language;
     }
 
-    public enum Weather {
-        SUNNY, RAINY, DROUGHT, NEUTRAL
+    public enum Language {
+        CPLUS, JAVA, PYTHON, LOLCODE
     }
 }

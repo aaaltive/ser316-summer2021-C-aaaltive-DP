@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 public class Cycle {
     private Environment environment;
     private Time time;
 
-    public Cycle(int weatherNumber, Time time) {
-        environment = new Environment(Environment.Weather.values()[weatherNumber]);
+    public Cycle(int languageNumber, Time time) {
+        environment = new Environment(Environment.Language.values()[languageNumber]);
         this.time = time;
     }
 
@@ -11,9 +13,9 @@ public class Cycle {
         return environment;
     }
 
-    public void runCycle(Trainer[] trainers) {
-        for (int i = 0; i < trainers.length; i++) {
-            new Action(trainers[i], time);
+    public void runCycle(ArrayList<Trainer> trainers) {
+        for (int i = 0; i < trainers.size() - 1; i++) {
+            new Action(trainers.get(i), time);
         }
     }
 

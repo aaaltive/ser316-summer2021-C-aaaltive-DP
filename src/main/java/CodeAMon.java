@@ -1,20 +1,59 @@
+import java.util.concurrent.ThreadLocalRandom;
+
 public abstract class CodeAMon implements Constants {
 
     protected int hp;
     protected int xp;
+    protected int defaultDamage;
+    protected double defaultDefense;
     protected int level;
     protected Types type;
+    protected Types debuffType;
+    protected Types buffType;
     protected double typeBuffer;
     protected double envBuffer;
-    private boolean didBattle;
+    protected boolean didBattle;
 
-    public abstract double getAttack();
+    public CodeAMon(){
+        hp = MAX_HP;
+        xp = 0;
+        level = 0;
+        didBattle = false;
+    }
 
-    protected abstract void setWeatherBonus(Environment.Weather weather);
+    public double getAttack(){
+        int attackNumber = ThreadLocalRandom.current().nextInt(0, 4);
+        switch (attackNumber) {
+            case ATTACK_ID_CONSTRUCT:
+                return (defaultDamage + (level * LEVEL_BONUS)) * ATTACK_BONUS * typeBuffer * envBuffer;
+            default:
+                return (defaultDamage  + (level * LEVEL_BONUS)) * typeBuffer * envBuffer;
+        }
+    }
 
-    protected abstract void setTypeBonus(CodeAMon opponent);
+    public double getDefense(){
+        return (defaultDefense + (level * LEVEL_BONUS)) * typeBuffer * envBuffer;
+    }
 
-    public abstract double getDefense();
+    protected void setLanguageBonus(Environment.Language language){
+        if(type.toString().compareTo(new Environment(language).getBuffedType().toString()) == 0){
+            envBuffer = BONUS;
+        } else if(type.toString().compareTo(new Environment(language).getDebuffedType().toString()) == 0){
+            envBuffer = BONUS;
+        } else {
+            envBuffer = 1;
+        }
+    }
+
+    protected void setTypeBonus(CodeAMon opponent) {
+        if(opponent.getType().equals(debuffType)) {
+            typeBuffer = DEBUFF;
+        } else if(opponent.getType().equals(buffType)) {
+            typeBuffer = BONUS;
+        } else {
+            typeBuffer = 1;
+        }
+    }
 
     public Types getType() {
         return type;
@@ -27,9 +66,9 @@ public abstract class CodeAMon implements Constants {
 
     public void heal(){
         if (!didBattle) {
-            hp = hp + HEAL_HP;
-            if (hp > MAX_HP) {
-                hp = MAX_HP;
+            hp = hp + (int)(HEAL_HP + (level * LEVEL_BONUS));
+            if (hp > (int)(HEAL_HP + (level * LEVEL_BONUS))) {
+                hp = (int)(HEAL_HP + (level * LEVEL_BONUS));
             }
         }
     }
@@ -43,7 +82,7 @@ public abstract class CodeAMon implements Constants {
     }
 
     public void takeHp(double percentChange){
-        hp = (int) (hp - (hp * percentChange));
+        hp = (int) (hp - percentChange);
     }
 
     public void evolve() {
@@ -72,4 +111,10 @@ public abstract class CodeAMon implements Constants {
     }
 
     public enum Types {ADAPTOR, BUILDER, COMMAND, SINGLTON}
+
+    public enum Attack {WRAP, CONSTRUCT, ENCAPSULATE, RESTRICT}
+    //restrict-singleton
+    // wrap-adapter
+    //construct-builder
+    //encapsulate-Command
 }
