@@ -49,14 +49,25 @@ public class World {
     private void nextDay(){
         day = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.DAY);
         night = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.NIGHT);
+        time = day;
         //todo: add the healing of codeamon that did not battle during night.
     }
 
     public void letWorldRun(int numberCycles){
         for (int i = 0; i < numberCycles; i++) {
-            day.runCycle(world.getTrainers());
+            System.out.println("~~~~~~~~DAY " + (i + 1) + " of simulation~~~~~~~\nThe environment of this cycle is " +
+                    time.getEnvironment().getLanguage().toString().toLowerCase() + " and it is day time." );
+            time.runCycle(world.getTrainers());
+            time = night;
+            System.out.println("The environment of this cycle is " + time.getEnvironment().getLanguage().toString().
+                    toLowerCase() + " and it is now night time." );
             night.runCycle(world.getTrainers());
             nextDay();
         }
+
+    }
+
+    public boolean isDay(){
+        return (time.equals(day));
     }
 }

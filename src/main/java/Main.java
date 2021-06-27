@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Spinning up world.");
-        World.getWorld().letWorldRun(1);
+        World.getWorld().letWorldRun(4);
 
     }
 }

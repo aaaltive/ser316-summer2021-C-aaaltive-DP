@@ -84,4 +84,16 @@ public class Trainer implements Constants{
     public void payReward() {
         credits += BATTLE_REWARD;
     }
+
+    public void awardCredits() {
+        this.credits += BATTLE_REWARD;
+    }
+
+    public void incrementWins() {
+        wins++;
+    }
+
+    public void incrementLosses() {
+        losses++;
+    }
 }

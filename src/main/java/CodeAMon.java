@@ -59,7 +59,7 @@ public abstract class CodeAMon implements Constants {
         return type;
     }
 
-    private void resetBonus() {
+    public void resetBonus() {
         typeBuffer = 0.0;
         envBuffer = 0.0;
     }

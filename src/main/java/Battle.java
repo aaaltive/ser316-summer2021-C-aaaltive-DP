@@ -21,7 +21,11 @@ public class Battle implements Constants{
         defender.takeHp(damage);
         System.out.println(defender.getType().toString().toLowerCase() + " took " + damage + " damage.");
         if(defender.getHp() <= K_O) {
-            System.out.println(defender.getType().toString().toLowerCase() + " has been knocked out!");
+            System.out.println(defender.getType().toString().toLowerCase() + " has been knocked out! " +
+                    attacker.getType().toString().toLowerCase() + " has gained " + defender.getLevel() +
+                    " XP!");
+            endBattle();
+            attacker.awardXP(defender.getLevel());
             return attacker;
         } else if(defender.getHp() < HEALING_POTION_THRESHOLD && !(defTrainer.getName().compareTo("wild") == 0)) {
             for (Item item: defTrainer.getInventory()) {
@@ -36,6 +40,11 @@ public class Battle implements Constants{
         attacker.takeHp(damage);
         System.out.println(attacker.getType().toString().toLowerCase() + " took " + damage + " damage.");
         if(attacker.getHp() <= K_O) {
+            System.out.println(attacker.getType().toString().toLowerCase() + " has been knocked out! " +
+                    defender.getType().toString().toLowerCase() + " has gained " + attacker.getLevel() +
+                    " XP!");
+            endBattle();
+            defender.awardXP(attacker.getLevel());
             return defender;
         } else {
             return null;
@@ -43,7 +52,12 @@ public class Battle implements Constants{
     }
 
     private void endBattle(){
-
+        attacker.resetBonus();
+        defender.resetBonus();
+        if(World.getWorld().isDay()) {
+            attacker.markDidBattle();
+            defender.markDidBattle();
+        }
     }
 
 }

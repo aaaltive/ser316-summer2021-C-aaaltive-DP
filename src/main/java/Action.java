@@ -76,11 +76,17 @@ public class Action implements Constants{
                         winner = battle.fightRound(attacker, opponent);
                     }
                     if (winner.equals(attacker)){
-                        System.out.println(trainer.getName() + " wins the battle with a" + attacker.getType()
+                        System.out.println(trainer.getName() + " wins the battle with a " + attacker.getType()
                                 .toString().toLowerCase() + ". " + trainer.getName() + " wins 2 credits!");
+                        trainer.awardCredits();
+                        trainer.incrementWins();
+                        trainerOpp.incrementLosses();
                     } else {
                         System.out.println(trainerOpp.getName() + " wins the battle with a" + opponent.getType()
                                 .toString().toLowerCase() + ". " + trainer.getName() + " wins 2 credits!");
+                        trainerOpp.awardCredits();
+                        trainerOpp.incrementWins();
+                        trainer.incrementLosses();
                     }
                     break;
                 default:
