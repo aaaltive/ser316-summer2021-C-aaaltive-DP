@@ -17,6 +17,13 @@ public class Battle implements Constants{
     }
 
     public CodeAMon fightRound(CodeAMon attacker, CodeAMon defender){
+        for (Item item : attTrainer.getInventory()) {
+            if(item.toString().compareTo("ATTACK_BOOSTER") == 0) {
+                item = new Item(Item.ItemTypes.EMPTY);
+                attacker.useAttackPotion();
+                System.out.println(attacker.getType().toString().toLowerCase() + " used an attack booster potion.");
+            }
+        }
         double damage = attacker.getAttack() * defender.getDefense();
         defender.takeHp(damage);
         System.out.println(defender.getType().toString().toLowerCase() + " took " + damage + " damage.");

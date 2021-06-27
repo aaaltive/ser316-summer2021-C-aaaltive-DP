@@ -83,7 +83,7 @@ public class Action implements Constants{
                         trainerOpp.incrementLosses();
                     } else {
                         System.out.println(trainerOpp.getName() + " wins the battle with a" + opponent.getType()
-                                .toString().toLowerCase() + ". " + trainer.getName() + " wins 2 credits!");
+                                .toString().toLowerCase() + ". " + trainerOpp.getName() + " wins 2 credits!");
                         trainerOpp.awardCredits();
                         trainerOpp.incrementWins();
                         trainer.incrementLosses();

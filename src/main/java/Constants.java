@@ -3,6 +3,7 @@ public interface Constants {
     double DEBUFF = 0.75;
     double NO_BONUS = 1.0;
     double ATTACK_BONUS = 1.2;
+    double ATTACK_BOOSTER = 1.2;
     double NONE_ATTACK = 0.0;
     double K_O = 0.0;
     double TESTING_DAMAGE_VALUE = 130.0;

@@ -10,6 +10,7 @@ public abstract class CodeAMon implements Constants {
     protected Types type;
     protected Types debuffType;
     protected Types buffType;
+    protected boolean attackPotion;
     protected double typeBuffer;
     protected double envBuffer;
     protected boolean didBattle;
@@ -25,8 +26,14 @@ public abstract class CodeAMon implements Constants {
         int attackNumber = ThreadLocalRandom.current().nextInt(0, 4);
         switch (attackNumber) {
             case ATTACK_ID_CONSTRUCT:
+                if(attackPotion) {
+                    return (defaultDamage + (level * LEVEL_BONUS)) * ATTACK_BONUS * typeBuffer * envBuffer * ATTACK_BOOSTER;
+                }
                 return (defaultDamage + (level * LEVEL_BONUS)) * ATTACK_BONUS * typeBuffer * envBuffer;
             default:
+                if(attackPotion){
+                    return (defaultDamage  + (level * LEVEL_BONUS)) * typeBuffer * envBuffer * ATTACK_BOOSTER;
+                }
                 return (defaultDamage  + (level * LEVEL_BONUS)) * typeBuffer * envBuffer;
         }
     }
@@ -62,6 +69,7 @@ public abstract class CodeAMon implements Constants {
     public void resetBonus() {
         typeBuffer = 0.0;
         envBuffer = 0.0;
+        attackPotion = false;
     }
 
     public void heal(){
@@ -113,8 +121,14 @@ public abstract class CodeAMon implements Constants {
     public enum Types {ADAPTOR, BUILDER, COMMAND, SINGLTON}
 
     public enum Attack {WRAP, CONSTRUCT, ENCAPSULATE, RESTRICT}
-    //restrict-singleton
-    // wrap-adapter
-    //construct-builder
-    //encapsulate-Command
+
+    public void printDetails(){
+        System.out.println(
+                "-" + type.toString().toLowerCase() + ": \n\t" +
+                        "Level: " + this.level);
+    }
+
+    public void useAttackPotion() {
+        attackPotion = true;
+    }
 }

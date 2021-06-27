@@ -79,6 +79,7 @@ public class Trainer implements Constants{
 
     public void catchMon(CodeAMon mon) {
         codeAMons[numMons] = mon;
+        numMons++;
     }
 
     public void payReward() {
@@ -96,4 +97,17 @@ public class Trainer implements Constants{
     public void incrementLosses() {
         losses++;
     }
+
+    public int getNumMons() {
+        return numMons;
+    }
+
+    public void printDetails() {
+        System.out.println("~~~~****~~~~\n" + name + " has " + numMons + " Code-A-Mons:");
+        for (int i = 0; i < numMons; i++) {
+            codeAMons[i].printDetails();
+        }
+        System.out.println(name + " has won " + wins + " tournament battles, and lost " + losses + ".");
+    }
+
 }

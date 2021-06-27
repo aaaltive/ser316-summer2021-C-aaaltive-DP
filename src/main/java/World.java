@@ -59,12 +59,15 @@ public class World {
                     time.getEnvironment().getLanguage().toString().toLowerCase() + " and it is day time." );
             time.runCycle(world.getTrainers());
             time = night;
-            System.out.println("The environment of this cycle is " + time.getEnvironment().getLanguage().toString().
-                    toLowerCase() + " and it is now night time." );
+            System.out.println("\n~~~~It is now night time, and the environment of this cycle is " + time.getEnvironment().getLanguage().toString().
+                    toLowerCase() );
             night.runCycle(world.getTrainers());
             nextDay();
         }
-
+        System.out.println("~~~~The simulation is over, calculating trainer scores~~~~");
+        for (Trainer trainer: trainers) {
+            trainer.printDetails();
+        }
     }
 
     public boolean isDay(){
