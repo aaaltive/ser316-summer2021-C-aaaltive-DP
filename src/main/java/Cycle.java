@@ -19,5 +19,9 @@ public class Cycle {
         }
     }
 
-    public enum Time {DAY, NIGHT};
+    public Time getTime() {
+        return time;
+    }
+
+    public enum Time {DAY, NIGHT}
 }

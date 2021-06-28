@@ -24,18 +24,16 @@ public abstract class CodeAMon implements Constants {
 
     public double getAttack(){
         int attackNumber = ThreadLocalRandom.current().nextInt(0, 4);
-        switch (attackNumber) {
-            case ATTACK_ID_CONSTRUCT:
-                if(attackPotion) {
-                    return (defaultDamage + (level * LEVEL_BONUS)) * ATTACK_BONUS * typeBuffer * envBuffer * ATTACK_BOOSTER;
-                }
-                return (defaultDamage + (level * LEVEL_BONUS)) * ATTACK_BONUS * typeBuffer * envBuffer;
-            default:
-                if(attackPotion){
-                    return (defaultDamage  + (level * LEVEL_BONUS)) * typeBuffer * envBuffer * ATTACK_BOOSTER;
-                }
-                return (defaultDamage  + (level * LEVEL_BONUS)) * typeBuffer * envBuffer;
+        if (attackNumber == ATTACK_ID_CONSTRUCT) {
+            if (attackPotion) {
+                return (defaultDamage + (level * LEVEL_BONUS)) * ATTACK_BONUS * typeBuffer * envBuffer * ATTACK_BOOSTER;
+            }
+            return (defaultDamage + (level * LEVEL_BONUS)) * ATTACK_BONUS * typeBuffer * envBuffer;
         }
+        if (attackPotion) {
+            return (defaultDamage + (level * LEVEL_BONUS)) * typeBuffer * envBuffer * ATTACK_BOOSTER;
+        }
+        return (defaultDamage + (level * LEVEL_BONUS)) * typeBuffer * envBuffer;
     }
 
     public double getDefense(){
@@ -110,6 +108,10 @@ public abstract class CodeAMon implements Constants {
 
     public int getLevel() {
         return level;
+    }
+
+    public void evolveLevel() {
+        level++;
     }
 
     public void endDay(){

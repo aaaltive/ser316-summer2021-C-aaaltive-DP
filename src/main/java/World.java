@@ -19,8 +19,7 @@ public class World {
     private World() {
         languageChooser = new Random();
         factory = new CodeAMonFactory();
-        trainers = new ArrayList<Trainer>();
-        //TODO: add 1 codeAMon to each trainer
+        trainers = new ArrayList<>();
         trainers.add(new Trainer("Erich Gamma", factory));
         trainers.add(new Trainer("Richard Helm", factory));
         trainers.add(new Trainer("Ralph Johnson", factory));
@@ -42,15 +41,24 @@ public class World {
         return factory;
     }
 
-    public Cycle getCycle() {
+    public Cycle getCurrCycle() {
         return time;
     }
 
     private void nextDay(){
+        for (Trainer trainer: trainers) {
+            for (int i = 0; i < trainer.getNumMons(); i++) {
+                if(!trainer.getCodeAMons()[i].didBattle) {
+                    trainer.getCodeAMons()[i].heal();
+                }
+                if(trainer.getCodeAMons()[i].getXp() > trainer.getCodeAMons()[i].getLevel()) {
+                    trainer.getCodeAMons()[i].evolveLevel();
+                }
+            }
+        }
         day = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.DAY);
         night = new Cycle(languageChooser.nextInt(Environment.Language.values().length), Cycle.Time.NIGHT);
         time = day;
-        //todo: add the healing of codeamon that did not battle during night.
     }
 
     public void letWorldRun(int numberCycles){

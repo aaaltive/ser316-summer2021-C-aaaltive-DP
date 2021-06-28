@@ -8,12 +8,11 @@ public class Action implements Constants{
         if (time.toString().compareTo("DAY") == 0) {
             switch (actionChoice) {
                 case ACTION_BUY:
-                    //todo: replace 3 with values().length of items enum
-                    int itemChooser = ThreadLocalRandom.current().nextInt(1, 3);
+                    int itemChooser = ThreadLocalRandom.current().nextInt(1, NUM_ITEMS_IN_GAME);
                     Item.ItemTypes purchase = Item.ItemTypes.values()[itemChooser];
-                    System.out.println(trainer.getName() + " wants to buy a " + purchase.toString() + ".");
+                    System.out.println(trainer.getName() + " wants to buy a " + purchase + ".");
                     if (trainer.getCredits() > ITEM_COST && trainer.buyItem(purchase)) {
-                        System.out.println(trainer.getName() + " purchased a " + purchase.toString() + ".");
+                        System.out.println(trainer.getName() + " purchased a " + purchase + ".");
                     } else {
                         System.out.println(trainer.getName() + " did not have enough credits, or already had a full inventory");
                     }
@@ -45,12 +44,11 @@ public class Action implements Constants{
                     System.out.println("Something went wrong, the trainer did nothing all day");
             }
         } else {
-            switch (actionChoice) {
-                case ACTION_BATTLE:
+            if (actionChoice == ACTION_BATTLE) {
                     CodeAMon attacker = trainer.callCodeAMon();
                     if (attacker.getHp() < MIN_HP_ATTACK) {
-                        actionChoice = ACTION_HEAL;
-                        break;
+                        System.out.println(trainer.getName() + " wants to let to let his CodAMon rest for the night.");
+                        return;
                     }
                     System.out.println(trainer.getName() + " wants to battle with another trainer tonight!");
                     int randomOppChooser = ThreadLocalRandom.current().nextInt(0, World.getWorld().getTrainers().size());
@@ -60,7 +58,7 @@ public class Action implements Constants{
                     while (trainerOpp.equals(trainer) || opponent.getHp() < MIN_HP_ATTACK) {
                         count++;
                         if (count == World.getWorld().getTrainers().size()){
-                            System.out.println(trainer.getName() + " could not find any opponents with CodeAMon able to fight.");
+                            System.out.println(trainer.getName() + " could not find any opponents with CodeAMon healthy enough to fight.");
                             break;
                         }
                         trainerOpp = World.getWorld().getTrainers().get((randomOppChooser + count) % World.getWorld().getTrainers().size());
@@ -88,11 +86,10 @@ public class Action implements Constants{
                         trainerOpp.incrementWins();
                         trainer.incrementLosses();
                     }
-                    break;
-                default:
-                    System.out.println(trainer.getName() + " wants to let his CodeAMon rest for the night");
+                    return;
             }
         }
+        System.out.println(trainer.getName() + " wants to let his CodeAMon rest for the night");
     }
 
 }

@@ -12,8 +12,8 @@ public class Battle implements Constants{
         this.defender = defender;
         attacker.setTypeBonus(defender);
         defender.setTypeBonus(attacker);
-        attacker.setLanguageBonus(World.getWorld().getCycle().getEnvironment().getLanguage());
-        defender.setLanguageBonus(World.getWorld().getCycle().getEnvironment().getLanguage());
+        attacker.setLanguageBonus(World.getWorld().getCurrCycle().getEnvironment().getLanguage());
+        defender.setLanguageBonus(World.getWorld().getCurrCycle().getEnvironment().getLanguage());
     }
 
     public CodeAMon fightRound(CodeAMon attacker, CodeAMon defender){
@@ -32,7 +32,7 @@ public class Battle implements Constants{
                     attacker.getType().toString().toLowerCase() + " has gained " + defender.getLevel() +
                     " XP!");
             endBattle();
-            attacker.awardXP(defender.getLevel());
+            attacker.awardXP(defender.getLevel() + 1);
             return attacker;
         } else if(defender.getHp() < HEALING_POTION_THRESHOLD && !(defTrainer.getName().compareTo("wild") == 0)) {
             for (Item item: defTrainer.getInventory()) {
@@ -51,7 +51,7 @@ public class Battle implements Constants{
                     defender.getType().toString().toLowerCase() + " has gained " + attacker.getLevel() +
                     " XP!");
             endBattle();
-            defender.awardXP(attacker.getLevel());
+            defender.awardXP(attacker.getLevel() + 1);
             return defender;
         } else {
             return null;
@@ -61,7 +61,7 @@ public class Battle implements Constants{
     private void endBattle(){
         attacker.resetBonus();
         defender.resetBonus();
-        if(World.getWorld().isDay()) {
+        if(World.getWorld().getCurrCycle().getTime().toString().compareTo("NIGHT") == 0) {
             attacker.markDidBattle();
             defender.markDidBattle();
         }
