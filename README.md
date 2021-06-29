@@ -28,3 +28,5 @@ Assignment 5a/b - Design Patterns
   - Purchases can be made from the store
   - Trainers can attempt to get new code-a-mon
     
+**Screencast link**
+> https://youtu.be/1M27wpmbKwA
