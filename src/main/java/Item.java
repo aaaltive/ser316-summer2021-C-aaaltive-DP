@@ -2,6 +2,10 @@ public class Item {
 
     private final ItemTypes type;
 
+    /**
+     * Costructor of an item.
+     * @param type the type of item to construct
+     */
     public Item(ItemTypes type) {
         switch (type) {
             case EMPTY:

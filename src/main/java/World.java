@@ -52,7 +52,7 @@ public class World {
         for (Trainer trainer : trainers) {
             for (int i = 0; i < trainer.getNumMons(); i++) {
                 trainer.restMons();
-                trainer.getCodeAMons()[i].evolve();
+                trainer.evolveCodeAMons();
             }
         }
         day = new Cycle(languageChooser.nextInt(Environment.Language.values().length),
@@ -62,6 +62,10 @@ public class World {
         time = day;
     }
 
+    /**
+     * Method runs the simulation for the specified number of days.
+     * @param numberCycles the number of days to run the simulation
+     */
     public void letWorldRun(int numberCycles) {
         for (int i = 0; i < numberCycles; i++) {
             System.out.println("~~~~~~~~DAY " + (i + 1)

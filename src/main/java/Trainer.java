@@ -72,22 +72,50 @@ public class Trainer implements Constants {
 
     public void restMons() {
         for (int i = 0; i < numMons; i++) {
-            if (!codeAMons[i].didBattle) {
-                codeAMons[i].heal();
-            }
+            codeAMons[i].endDay();
         }
     }
 
-    public CodeAMon[] getCodeAMons() {
-        return codeAMons;
+    /**
+     * Method cycles through all CodeAMon and runs evolve method.
+     */
+    public void evolveCodeAMons() {
+        for (int i = 0; i < numMons; i++) {
+            codeAMons[i].evolve();
+        }
     }
 
     public int getCredits() {
         return credits;
     }
 
-    public Item[] getInventory() {
-        return inventory;
+    /**
+     * method to check if a Trainer has a attack booster and use it.
+     * @return returns true if a attack booster exists in inventory
+     */
+
+    public boolean useAttackBooser() {
+        for (Item item : inventory) {
+            if (item.toString().compareTo("ATTACK_BOOSTER") == 0) {
+                item = new Item(Item.ItemTypes.EMPTY);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * method to check if a Trainer has a healing potion and use it.
+     * @return returns true if a healing potion exists in inventory
+     */
+    public boolean useHealingPotion() {
+        for (Item item : inventory) {
+            if (item.toString().compareTo("HEALING_POTION") == 0) {
+                item = new Item(Item.ItemTypes.EMPTY);
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getWins() {

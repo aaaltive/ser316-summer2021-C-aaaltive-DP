@@ -13,6 +13,10 @@ public class Cycle {
         return environment;
     }
 
+    /**
+     * Method performs an action for each of the trainers in the list.
+     * @param trainers a list of Trainer objects
+     */
     public void runCycle(ArrayList<Trainer> trainers) {
         for (int i = 0; i < trainers.size() - 1; i++) {
             new Action(trainers.get(i), time);
