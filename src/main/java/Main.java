@@ -9,10 +9,13 @@ public class Main {
 
     /**
      * The starting point for the program.
+     *
      * @param args arguments, probably none.
      */
 
     public static void main(String[] args) {
-        System.out.println("Waddup, world.");
+        System.out.println("Spinning up world.");
+        World.getWorld().letWorldRun(8);
+
     }
 }
