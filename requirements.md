@@ -14,24 +14,26 @@
 - [x] Code-a-mons gain XP from winning battles and can level up after earning enough
 - [x] Only 1 battle at a time
 
+**at day time:**
+- [x] Purchases can be made from store.
+- [x] Trainers can attempt to get new code-a-mon
+
 **at night:**
-- [ ] Code-a-mons can heal
-- [ ] Trainers can attempt to get new code-a-mon
-- [ ] Code-a-mons evolve
-- [ ] Purchases can be made from store.
+- [x] Purchases can be made from store.
+- [x] Trainers can attempt to get new code-a-mon
 
 **Cod-a-mons should have:**
-- [ ] Stats: Attack, Defense, Health
-- [ ] 1-4 different attacks
+- [x] Stats: Attack, Defense, Health
+- [x] 1-4 different attacks
 - [ ] Each attack should have specific type that gains effectiveness if matches user type
 - [ ] Attacks should have chance for critical strike (double damage)
 - [ ] Attacks should have chance to miss
-- [ ] Attacks should have a minimum of 1 damage unless they use attack that deals base 0 damage
+- [x] Attacks should have a minimum of 1 damage unless they use attack that deals base 0 damage
 
 **During battle with trainers**
-- [ ] One code-a-mon for each trainer at a time
-- [ ] turn based attacks untill one faints
-- [ ] Once a code-a-mon's health reaches 0, they faint and fight is over.  htey can heal at night
+- [x] One code-a-mon for each trainer at a time
+- [x] turn based attacks untill one faints
+- [x] Once a code-a-mon's health reaches 0, they faint and fight is over.  htey can heal at night
 - [ ] Trainers do battle untill all thier code-a-mon are fainted
 - [ ] XP given to code-a-mon each time it wins a battle
 - [ ] each turn, a trainer can either use an attack or an item

@@ -114,8 +114,9 @@ public abstract class CodeAMon implements Constants {
      */
 
     public void evolve() {
-        if (xp > level) {
+        if (xp > level && level < MAX_LEVEL) {
             level++;
+            hp = (int) (hp * LEVEL_BONUS);
             xp = 0;
         }
     }
@@ -136,6 +137,10 @@ public abstract class CodeAMon implements Constants {
         level++;
     }
 
+    /**
+     * method perfoms the functions for the CodeAMon for the end of each day.
+     */
+
     public void endDay() {
         evolve();
         if (!didBattle) {
@@ -143,6 +148,10 @@ public abstract class CodeAMon implements Constants {
         }
         didBattle = false;
     }
+
+    /**
+     * method prints all the details for the CodeAMon.
+     */
 
     public void printDetails() {
         System.out.println(

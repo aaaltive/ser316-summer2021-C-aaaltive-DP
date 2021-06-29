@@ -33,14 +33,13 @@ public class Battle implements Constants {
      */
 
     public CodeAMon fightRound(CodeAMon attacker, CodeAMon defender) {
-        for (Item item : attTrainer.getInventory()) {
-            if (item.toString().compareTo("ATTACK_BOOSTER") == 0) {
-                item = new Item(Item.ItemTypes.EMPTY);
-                attacker.useAttackPotion();
-                System.out.println(attacker.getType().toString().toLowerCase()
-                        + " used an attack booster potion.");
-            }
+
+        if (attTrainer.useAttackBooser()) {
+            attacker.useAttackPotion();
+            System.out.println(attacker.getType().toString().toLowerCase()
+                    + " used an attack booster potion.");
         }
+
         double damage = attacker.getAttack() * defender.getDefense();
         defender.takeHp(damage);
         System.out.println(defender.getType().toString().toLowerCase() + " took "
@@ -56,14 +55,13 @@ public class Battle implements Constants {
             return attacker;
         } else if (defender.getHp() < HEALING_POTION_THRESHOLD && !(defTrainer.getName()
                 .compareTo("wild") == 0)) {
-            for (Item item : defTrainer.getInventory()) {
-                if (item.toString().compareTo("HEALING_POTION") == 0) {
-                    item = new Item(Item.ItemTypes.EMPTY);
-                    defender.heal();
-                    System.out.println(defender.getType().toString().toLowerCase()
-                            + " used a healing potion.");
-                }
+
+            if (defTrainer.useHealingPotion()) {
+                defender.heal();
+                System.out.println(defender.getType().toString().toLowerCase()
+                        + " used a healing potion.");
             }
+
         }
         damage = defender.getAttack() * attacker.getDefense();
         attacker.takeHp(damage);

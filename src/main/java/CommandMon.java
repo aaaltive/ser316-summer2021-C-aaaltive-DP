@@ -1,5 +1,9 @@
 public class CommandMon extends CodeAMon {
 
+    /**
+     * Constructor for a CommandMon CodeAMon.
+     */
+
     public CommandMon() {
         super();
         defaultDamage = 40;
