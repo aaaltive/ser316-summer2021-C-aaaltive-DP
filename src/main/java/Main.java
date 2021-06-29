@@ -1,5 +1,3 @@
-import java.util.Locale;
-
 /**
  * This is the Main class, the starting point for running the program.
  *
@@ -11,12 +9,13 @@ public class Main {
 
     /**
      * The starting point for the program.
+     *
      * @param args arguments, probably none.
      */
 
     public static void main(String[] args) {
         System.out.println("Spinning up world.");
-        World.getWorld().letWorldRun(4);
+        World.getWorld().letWorldRun(8);
 
     }
 }

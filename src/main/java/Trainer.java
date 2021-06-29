@@ -1,4 +1,4 @@
-public class Trainer implements Constants{
+public class Trainer implements Constants {
 
     private CodeAMon[] codeAMons;
     private int numMons;
@@ -6,13 +6,20 @@ public class Trainer implements Constants{
     private Item[] inventory;
     private int wins;
     private int losses;
-    private String name;
+    private final String name;
 
-    public Trainer(){
+    public Trainer() {
         name = "wild";
     }
 
-    public Trainer(String name, CodeAMonFactory factory){
+    /**
+     * Constructor for a Trainer.
+     * @param name the name of the trainer.
+     * @param factory the CodeAMonFactory that was initiated in
+     *                this world.
+     */
+
+    public Trainer(String name, CodeAMonFactory factory) {
         this.name = name;
         codeAMons = new CodeAMon[6];
         codeAMons[0] = factory.getCodeAMon();
@@ -26,10 +33,16 @@ public class Trainer implements Constants{
         losses = 0;
     }
 
-    public boolean buyItem(Item.ItemTypes itemType){
+    /**
+     * Adds a item to the inventory of a trainer.
+     * @param itemType the type of Item being added
+     * @return if the purchase was successfull, returns true
+     */
+
+    public boolean buyItem(Item.ItemTypes itemType) {
         credits -= ITEM_COST;
         for (int i = 0; i < inventory.length; i++) {
-            if (inventory[i].getType().toString().compareTo(Item.ItemTypes.EMPTY.toString()) == 0){
+            if (inventory[i].getType().toString().compareTo(Item.ItemTypes.EMPTY.toString()) == 0) {
                 inventory[i] = new Item(itemType);
                 return true;
             }
@@ -37,6 +50,11 @@ public class Trainer implements Constants{
         return false;
     }
 
+    /**
+     * Finds the CodeAMon with the most health and selects it for battle.
+     * @return CodeAMon that will do battle.
+     */
+    
     public CodeAMon callCodeAMon() {
         CodeAMon chosenMon = codeAMons[0];
         for (int i = 1; i < numMons; i++) {
@@ -47,9 +65,16 @@ public class Trainer implements Constants{
         return chosenMon;
     }
 
+    /**
+     * Method calls heal on all the monsters that did not
+     * do battle at night.
+     */
+
     public void restMons() {
-        for (int i = 0; i < codeAMons.length; i++) {
-            codeAMons[i].heal();
+        for (int i = 0; i < numMons; i++) {
+            if (!codeAMons[i].didBattle) {
+                codeAMons[i].heal();
+            }
         }
     }
 
@@ -82,10 +107,6 @@ public class Trainer implements Constants{
         numMons++;
     }
 
-    public void payReward() {
-        credits += BATTLE_REWARD;
-    }
-
     public void awardCredits() {
         this.credits += BATTLE_REWARD;
     }
@@ -102,12 +123,17 @@ public class Trainer implements Constants{
         return numMons;
     }
 
+    /**
+     * Method prints out the details of the CodeAMon onto the terminal.
+     */
+
     public void printDetails() {
         System.out.println("~~~~****~~~~\n" + name + " has " + numMons + " Code-A-Mons:");
         for (int i = 0; i < numMons; i++) {
             codeAMons[i].printDetails();
         }
-        System.out.println(name + " has won " + wins + " tournament battles, and lost " + losses + ".");
+        System.out.println("Wins: " + wins + "\nLosses: "
+                + losses + "\nCredits: " + credits);
     }
 
 }

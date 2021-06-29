@@ -1,9 +1,14 @@
-
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Action implements Constants{
+public class Action implements Constants {
 
-    public Action(Trainer trainer, Cycle.Time time){
+    /**
+     * This method is a mediator between the cycle, and the trainers and CodeAMon.
+     * @param trainer the trainer that is performing the action
+     * @param time day or night
+     */
+
+    public Action(Trainer trainer, Cycle.Time time) {
         int actionChoice = ThreadLocalRandom.current().nextInt(0, 2);
         if (time.toString().compareTo("DAY") == 0) {
             switch (actionChoice) {
@@ -14,7 +19,8 @@ public class Action implements Constants{
                     if (trainer.getCredits() > ITEM_COST && trainer.buyItem(purchase)) {
                         System.out.println(trainer.getName() + " purchased a " + purchase + ".");
                     } else {
-                        System.out.println(trainer.getName() + " did not have enough credits, or already had a full inventory");
+                        System.out.println(trainer.getName() + " did not have enough credits, or "
+                                + "already had a full inventory");
                     }
                     break;
                 case ACTION_BATTLE:
@@ -23,21 +29,26 @@ public class Action implements Constants{
                     CodeAMon attacker = trainer.callCodeAMon();
                     CodeAMon wildCodeAMon = World.getWorld().getFactory().getWildCodeAMon();
                     Battle battle = new Battle(trainer, attacker, wild, wildCodeAMon);
-                    System.out.println(trainer.getName() + " found a " + wildCodeAMon.getType().toString().toLowerCase()
-                            + " and will attempt to catch it using a " + attacker.getType().toString().toLowerCase()
+                    System.out.println(trainer.getName() + " found a " + wildCodeAMon.getType()
+                            .toString().toLowerCase()
+                            + " and will attempt to catch it using a "
+                            + attacker.getType().toString().toLowerCase()
                             + ".");
                     CodeAMon winner = null;
-                    while (winner == null){
+                    while (winner == null) {
                         winner = battle.fightRound(attacker, wildCodeAMon);
                     }
-                    if (winner.equals(attacker)){
+                    if (winner.equals(attacker)) {
                         wildCodeAMon.heal();
                         trainer.catchMon(wildCodeAMon);
-                        System.out.println(trainer.getName() + " has caught the wild " + wildCodeAMon.getType()
+                        attacker.awardXp(wildCodeAMon.getLevel());
+                        System.out.println(trainer.getName() + " has caught the wild "
+                                + wildCodeAMon.getType()
                                 .toString().toLowerCase() + ".");
                     } else {
-                        System.out.println(trainer.getName() + " failed to catch the wild " + wildCodeAMon.getType()
-                                .toString().toLowerCase() + ".");
+                        System.out.println(trainer.getName() + " failed to catch the wild "
+                                + wildCodeAMon.getType().toString().toLowerCase()
+                                + ".");
                     }
                     break;
                 default:
@@ -45,48 +56,59 @@ public class Action implements Constants{
             }
         } else {
             if (actionChoice == ACTION_BATTLE) {
-                    CodeAMon attacker = trainer.callCodeAMon();
-                    if (attacker.getHp() < MIN_HP_ATTACK) {
-                        System.out.println(trainer.getName() + " wants to let to let his CodAMon rest for the night.");
-                        return;
-                    }
-                    System.out.println(trainer.getName() + " wants to battle with another trainer tonight!");
-                    int randomOppChooser = ThreadLocalRandom.current().nextInt(0, World.getWorld().getTrainers().size());
-                    Trainer trainerOpp = World.getWorld().getTrainers().get(randomOppChooser);
-                    CodeAMon opponent = trainerOpp.callCodeAMon();
-                    int count = 0;
-                    while (trainerOpp.equals(trainer) || opponent.getHp() < MIN_HP_ATTACK) {
-                        count++;
-                        if (count == World.getWorld().getTrainers().size()){
-                            System.out.println(trainer.getName() + " could not find any opponents with CodeAMon healthy enough to fight.");
-                            break;
-                        }
-                        trainerOpp = World.getWorld().getTrainers().get((randomOppChooser + count) % World.getWorld().getTrainers().size());
-                        opponent = trainerOpp.callCodeAMon();
-                    }
-                    System.out.println(trainer.getName() + "'s opponent will be: " + trainerOpp.getName() + ".");
-                    System.out.println(trainer.getName() + " sends out " + attacker.getType().toString().toLowerCase()
-                            + " and " + trainerOpp.getName() + " sends out " + opponent.getType().toString().toLowerCase()
-                            + ".");
-                    CodeAMon winner = null;
-                    Battle battle = new Battle(trainer, attacker, trainerOpp, opponent);
-                    while (winner == null){
-                        winner = battle.fightRound(attacker, opponent);
-                    }
-                    if (winner.equals(attacker)){
-                        System.out.println(trainer.getName() + " wins the battle with a " + attacker.getType()
-                                .toString().toLowerCase() + ". " + trainer.getName() + " wins 2 credits!");
-                        trainer.awardCredits();
-                        trainer.incrementWins();
-                        trainerOpp.incrementLosses();
-                    } else {
-                        System.out.println(trainerOpp.getName() + " wins the battle with a" + opponent.getType()
-                                .toString().toLowerCase() + ". " + trainerOpp.getName() + " wins 2 credits!");
-                        trainerOpp.awardCredits();
-                        trainerOpp.incrementWins();
-                        trainer.incrementLosses();
-                    }
+                CodeAMon attacker = trainer.callCodeAMon();
+                if (attacker.getHp() < MIN_HP_ATTACK) {
+                    System.out.println(trainer.getName() + " wants to let to let his CodAMon rest "
+                            + "for the night.");
                     return;
+                }
+                System.out.println(trainer.getName() + " wants to battle with another trainer "
+                        + "tonight!");
+                int randomOppChooser = ThreadLocalRandom.current().nextInt(0, World.getWorld()
+                        .getTrainers().size());
+                Trainer trainerOpp = World.getWorld().getTrainers().get(randomOppChooser);
+                CodeAMon opponent = trainerOpp.callCodeAMon();
+                int count = 0;
+                while (trainerOpp.equals(trainer) || opponent.getHp() < MIN_HP_ATTACK) {
+                    count++;
+                    if (count == World.getWorld().getTrainers().size()) {
+                        System.out.println(trainer.getName() + " could not find any opponents with "
+                                + "CodeAMon healthy enough to fight.");
+                        break;
+                    }
+                    trainerOpp = World.getWorld().getTrainers().get((randomOppChooser + count)
+                            % World.getWorld().getTrainers().size());
+                    opponent = trainerOpp.callCodeAMon();
+                }
+                System.out.println(trainer.getName() + "'s opponent will be: " + trainerOpp
+                        .getName() + ".");
+                System.out.println(trainer.getName() + " sends out " + attacker.getType()
+                        .toString().toLowerCase()
+                        + " and " + trainerOpp.getName() + " sends out " + opponent.getType()
+                        .toString().toLowerCase()
+                        + ".");
+                CodeAMon winner = null;
+                Battle battle = new Battle(trainer, attacker, trainerOpp, opponent);
+                while (winner == null) {
+                    winner = battle.fightRound(attacker, opponent);
+                }
+                if (winner.equals(attacker)) {
+                    System.out.println(trainer.getName() + " wins the battle with a " + attacker
+                            .getType().toString().toLowerCase() + ". " + trainer.getName()
+                            + " wins 2 credits!");
+                    trainer.awardCredits();
+                    trainer.incrementWins();
+                    trainerOpp.incrementLosses();
+                } else {
+                    System.out.println(trainerOpp.getName() + " wins the battle with a"
+                            + opponent.getType()
+                            .toString().toLowerCase() + ". " + trainerOpp.getName()
+                            + " wins 2 credits!");
+                    trainerOpp.awardCredits();
+                    trainerOpp.incrementWins();
+                    trainer.incrementLosses();
+                }
+                return;
             }
         }
         System.out.println(trainer.getName() + " wants to let his CodeAMon rest for the night");

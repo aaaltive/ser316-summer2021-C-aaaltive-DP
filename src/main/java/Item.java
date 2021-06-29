@@ -1,8 +1,8 @@
 public class Item {
 
-    private ItemTypes type;
+    private final ItemTypes type;
 
-    public Item(ItemTypes type){
+    public Item(ItemTypes type) {
         switch (type) {
             case EMPTY:
                 this.type = ItemTypes.EMPTY;
@@ -22,6 +22,6 @@ public class Item {
         return type;
     }
 
-    public enum ItemTypes {EMPTY, HEALING_POTION, ATTACK_BOOSTER}
+    public enum ItemTypes { EMPTY, HEALING_POTION, ATTACK_BOOSTER }
 
 }

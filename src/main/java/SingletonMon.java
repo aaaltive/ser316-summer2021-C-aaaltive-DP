@@ -1,6 +1,4 @@
-import java.util.concurrent.ThreadLocalRandom;
-
-public class SingletonMon extends CodeAMon{
+public class SingletonMon extends CodeAMon {
 
     public SingletonMon() {
         super();

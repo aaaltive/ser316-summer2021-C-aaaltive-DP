@@ -1,7 +1,8 @@
-import java.util.concurrent.ThreadLocalRandom;
+public class BuilderMon extends CodeAMon {
 
-public class BuilderMon extends CodeAMon{
-
+    /**
+     * Costructs a BuilderMon CodeAMon.
+     */
     public BuilderMon() {
         super();
         defaultDamage = 25;

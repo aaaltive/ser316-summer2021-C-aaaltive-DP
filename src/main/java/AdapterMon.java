@@ -1,8 +1,9 @@
-import java.util.concurrent.ThreadLocalRandom;
+public class AdapterMon extends CodeAMon {
 
-public class AdapterMon extends CodeAMon{
-
-    public AdapterMon(){
+    /**
+     * Constructor for a AdaptorMon CodeAMon.
+     */
+    public AdapterMon() {
         super();
         defaultDamage = 30;
         defaultDefense = .40;

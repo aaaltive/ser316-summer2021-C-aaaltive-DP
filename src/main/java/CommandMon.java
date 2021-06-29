@@ -1,6 +1,4 @@
-import java.util.concurrent.ThreadLocalRandom;
-
-public class CommandMon extends CodeAMon{
+public class CommandMon extends CodeAMon {
 
     public CommandMon() {
         super();

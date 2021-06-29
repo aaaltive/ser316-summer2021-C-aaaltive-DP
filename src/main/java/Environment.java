@@ -8,21 +8,22 @@
 
 public class Environment {
 
-    private Language language;
-    private CodeAMon.Types buffedType;
-    private CodeAMon.Types debuffedType;
+    private final Language language;
+    private final CodeAMon.Types buffedType;
+    private final CodeAMon.Types debuffedType;
 
     /**
      * Default constructor for an environment.
      */
 
-    public Environment(){
+    public Environment() {
         this(Language.LOLCODE);
     }
 
     /**
      * creates a language type for a battle scenario and sets up the buffed and
      * debuffed types.
+     *
      * @param language the language type for the battle
      */
 
@@ -50,6 +51,7 @@ public class Environment {
 
     /**
      * Getter method for buffedType.
+     *
      * @return a string representing the buffedType
      */
 
@@ -59,6 +61,7 @@ public class Environment {
 
     /**
      * Getter method for debuffedType.
+     *
      * @return a string representing the debuffedType
      */
 
@@ -68,6 +71,7 @@ public class Environment {
 
     /**
      * getter method for the language variable.
+     *
      * @return this value for language, an enum.
      */
 

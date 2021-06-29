@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class Cycle {
-    private Environment environment;
-    private Time time;
+    private final Environment environment;
+    private final Time time;
 
     public Cycle(int languageNumber, Time time) {
         environment = new Environment(Environment.Language.values()[languageNumber]);
         this.time = time;
     }
 
-    public Environment getEnvironment(){
+    public Environment getEnvironment() {
         return environment;
     }
 
@@ -23,5 +23,5 @@ public class Cycle {
         return time;
     }
 
-    public enum Time {DAY, NIGHT}
+    public enum Time { DAY, NIGHT }
 }

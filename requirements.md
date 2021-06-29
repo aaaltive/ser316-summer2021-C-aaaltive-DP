@@ -1,18 +1,18 @@
 # Requirements
 
 **General**
-- [ ] use 3 design patterns
+- [x] use 3 design patterns
 - [x] A world with at least 2 trainers who each have at least 1 code-a-mon (Singleton)
-- [ ] Trainers can aquire more code-a-mons up to 6
-- [ ] Code-a-mons compete in 1v1 battles
+- [x] Trainers can aquire more code-a-mons up to 6
+- [x] Code-a-mons compete in 1v1 battles
 - [x] Simulations are run on cycles with 2 parts day and night
 - [x] each part will have its own weather event
-- [ ] Weather events should benefit some and and disadvantage other code-a-mons
-- [ ] Code-a-mons should have different types and have advantages/disadvantages over eachother
-- [ ] trainers can battle with wild code-a-mons during day for XP
-- [ ] Trainers can battle with other trainers at night for XP and money
-- [ ] Code-a-mons gain XP from winning battles and can level up after earning enough
-- [ ] Only 1 battle at a time
+- [x] Weather events should benefit some and and disadvantage other code-a-mons
+- [x] Code-a-mons should have different types and have advantages/disadvantages over eachother
+- [x] trainers can battle with wild code-a-mons during day for XP
+- [x] Trainers can battle with other trainers at night for XP and money
+- [x] Code-a-mons gain XP from winning battles and can level up after earning enough
+- [x] Only 1 battle at a time
 
 **at night:**
 - [ ] Code-a-mons can heal
@@ -37,21 +37,21 @@
 - [ ] each turn, a trainer can either use an attack or an item
 
 **Submission A**
-- [ ] Clean Git repo
-- [ ] Gradle works correctly
-- [ ] checkstyle and spotbugs included
-- [ ] Travis CI passes
-- [ ] JUNIT included
-- [ ] Readme.md description of design patterns
+- [x] Clean Git repo
+- [x] Gradle works correctly
+- [x] checkstyle and spotbugs included
+- [x] Travis CI passes
+- [x] JUNIT included
+- [x] Readme.md description of design patterns
 
 **Submisssion B**
-- [ ] All 3 design patters implemented
+- [x] All 3 design patterns implemented
 - [ ] 80% coverage not including main and getters/setters
 - [ ] screencast
 - [ ] PDF
     - [ ] screenshots of checkstyle, spotbugs, and jacoco reports
     - [ ] link to screencast
     - [ ] link to github repo
-    - [ ] linkt to travis repo
+    - [ ] link to travis repo
     
 
