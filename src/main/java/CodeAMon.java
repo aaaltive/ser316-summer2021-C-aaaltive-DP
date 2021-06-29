@@ -114,8 +114,9 @@ public abstract class CodeAMon implements Constants {
      */
 
     public void evolve() {
-        if (xp > level) {
+        if (xp > level && level < MAX_LEVEL) {
             level++;
+            hp = (int) (hp * LEVEL_BONUS);
             xp = 0;
         }
     }
